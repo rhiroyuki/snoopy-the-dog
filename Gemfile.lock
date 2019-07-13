@@ -172,6 +172,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    shoulda-matchers (4.1.0)
+      activesupport (>= 4.2.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -218,6 +220,7 @@ DEPENDENCIES
   rails (~> 6.0.0.rc1)
   rspec-rails
   sass-rails (~> 5)
+  shoulda-matchers
   standard
   turbolinks (~> 5)
   tzinfo-data
