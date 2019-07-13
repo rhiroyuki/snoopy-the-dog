@@ -18,6 +18,10 @@ group :development, :test do
   gem "rspec-rails"
 end
 
+group :test do
+  gem "database_cleaner"
+end
+
 group :development do
   gem "standard"
   gem "web-console", ">= 3.3.0"
