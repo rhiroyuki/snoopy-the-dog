@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_13_015255) do
+ActiveRecord::Schema.define(version: 2019_07_13_021645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "animals", force: :cascade do |t|
+    t.text "name"
+    t.decimal "monthly_fee", precision: 14, scale: 2
+    t.bigint "person_id", null: false
+    t.integer "animal_kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_animals_on_person_id"
+  end
 
   create_table "people", force: :cascade do |t|
     t.text "first_name"
@@ -24,4 +34,5 @@ ActiveRecord::Schema.define(version: 2019_07_13_015255) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "animals", "people"
 end
