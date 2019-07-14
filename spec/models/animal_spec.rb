@@ -23,25 +23,60 @@ describe Animal do
     end
 
     describe "custom validations" do
+      describe "cat validation" do
+        context "when person first name starts with letter A" do
+          it "animal is invalid" do
+            person = build_stubbed(:person, first_name: "Axl")
+            animal = build_stubbed(:animal, owner: person, animal_kind: :cat)
+
+            expect(animal).to be_invalid
+          end
+        end
+
+        context "when person first name doesnt start with letter A" do
+          it "animal is invalid" do
+            person = build_stubbed(:person, first_name: "Exl")
+            animal = build_stubbed(:animal, owner: person, animal_kind: :cat)
+
+            expect(animal).to be_valid
+          end
+        end
+      end
+
       describe "swallow validation" do
-        context "when person age is < 18" do
+        context "when person age is 17" do
           before { freeze_time(Time.local(2018, 12, 12, 12, 12)) }
           after { unfreeze_time }
 
-          it "is animal is invalid" do
-            person = build_stubbed(:person, birthdate_on: Date.new(2002, 10, 10))
+          it "animal is invalid" do
+            person = build_stubbed(:person, birthdate_on: Date.new(2001, 10, 10))
             animal = build_stubbed(:animal, owner: person, animal_kind: :swallow)
 
             expect(animal).to be_invalid
           end
+        end
 
-          it "is error is about person age being < 18" do
-            person = build_stubbed(:person, birthdate_on: Date.new(2002, 10, 10))
+        context "when person age is 18" do
+          before { freeze_time(Time.local(2018, 12, 12, 12, 12)) }
+          after { unfreeze_time }
+
+          it "animal is valid" do
+            person = build_stubbed(:person, birthdate_on: Date.new(2000, 10, 10))
             animal = build_stubbed(:animal, owner: person, animal_kind: :swallow)
 
-            animal.valid?
+            expect(animal).to be_valid
+          end
+        end
 
-            expect(animal.errors.messages).to include(owner: ["person age must be at least 18 or higher"])
+        context "when person age is 19" do
+          before { freeze_time(Time.local(2018, 12, 12, 12, 12)) }
+          after { unfreeze_time }
+
+          it "animal is valid" do
+            person = build_stubbed(:person, birthdate_on: Date.new(1999, 10, 10))
+            animal = build_stubbed(:animal, owner: person, animal_kind: :swallow)
+
+            expect(animal).to be_valid
           end
         end
       end
