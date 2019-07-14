@@ -4,7 +4,7 @@ require "rails_helper"
 
 describe Animal do
   describe "associations" do
-    subject(:animal) { build_stubbed(:animal) }
+    subject(:animal) { build(:animal) }
 
     it do
       expect(animal).to belong_to(:owner)
@@ -23,6 +23,27 @@ describe Animal do
     end
 
     describe "custom validations" do
+      describe "#monthly_fee_sum_cannot_surpass_limit" do
+        context "when owner is not set" do
+          it "makes the animal valid" do
+            dog = build(:animal, owner: build(:person))
+
+            expect(dog).to be_valid
+          end
+        end
+
+        context "when animal monthly_fee surpass sum limit" do
+          it "makes the animal invalid" do
+            animals = [build(:animal, monthly_fee: 800.00)]
+            owner = create(:person, animals: animals)
+
+            dog = build(:animal, monthly_fee: 200.01, owner: owner)
+
+            expect(dog).to be_invalid
+          end
+        end
+      end
+
       describe "cat validation" do
         context "when person first name starts with letter A" do
           it "animal is invalid" do
