@@ -8,4 +8,15 @@ describe Person do
   describe "associations" do
     it { expect(person).to have_many(:animals) }
   end
+
+  describe "#age" do
+    before { freeze_time(Time.local(2018, 12, 12, 12, 12 ,12 )) }
+    after { unfreeze_time }
+
+    it "returns the persons age" do
+      person = build_stubbed(:person, birthdate_on: Date.new(2000, 8, 15))
+
+      expect(person.age).to eq(18)
+    end
+  end
 end
