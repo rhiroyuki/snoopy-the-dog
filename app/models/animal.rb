@@ -6,8 +6,7 @@ class Animal < ApplicationRecord
   validates :monthly_fee, numericality: {greater_than_or_equal_to: 0}
 
   validates_with AnimalKindValidator
-
-  validate :monthly_fee_sum_cannot_surpass_limit
+  validates_with MonthlyFeeLimitValidator
 
   enum animal_kind: [:other,
                      :horse,
@@ -18,12 +17,4 @@ class Animal < ApplicationRecord
                      :platypus,
                      :cat,
                      :swallow,]
-
-  def monthly_fee_sum_cannot_surpass_limit
-    return true unless owner
-
-    if (owner.animals.pluck(:monthly_fee).sum + monthly_fee) > Person::MONTHLY_FEE_SUM_LIMIT
-      errors.add(:animals, "monthly fee surpassed limit")
-    end
-  end
 end
