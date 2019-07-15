@@ -1,24 +1,36 @@
-# README
+## Snoopy
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+<img src="https://data.whicdn.com/images/268218526/large.jpg" width="200" alt="Snoopy">
 
-Things you may want to cover:
+*"Snoopy is Charlie Brown's pet beagle. Snoopy is a loyal, innocent, imaginative and good-natured beagle."* - [Wikipedia](https://en.wikipedia.org/wiki/Snoopy)
 
-* Ruby version
+Solution for the proposed challenge.
 
-* System dependencies
+Snoopy is a Rails application with only some models implemented as well a couple of validations for some animals.
 
-* Configuration
+### Requirements
+* ruby 2.6
+* postgresql
 
-* Database creation
+### Setup
 
-* Database initialization
+You can run the following command to automatically install everything:
 
-* How to run the test suite
+```$ bin/setup```
 
-* Services (job queues, cache servers, search engines, etc.)
+Or check the file if you ran into any issues.
 
-* Deployment instructions
+### Tests
 
-* ...
+For automated tests this app uses RSpec, in order to ran the specs, issue the following command:
+
+```$ bundle exec rspec```
+
+### Linter
+
+This project uses [standard gem](https://github.com/testdouble/standard) for it's linter. You can run the linter by issueing the follwing command:
+```$ bundle exec standardrb```
+
+### Questions
+
+The answer for the proposed questions can be found [here in portuguese](answers-ptbr.md).
